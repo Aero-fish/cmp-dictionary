@@ -1,7 +1,11 @@
-# WARNING
+---
 
-**This is no longer maintained.**
-**I will archive it in due course.**
+# CHANGES IN THIS FORK
+
+- The plugin will no longer try to return results if the incompleted items's length
+  is less than `exact_length`.
+
+---
 
 # cmp-dictionary
 

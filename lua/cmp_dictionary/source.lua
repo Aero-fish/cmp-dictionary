@@ -55,7 +55,13 @@ function source:complete(request, callback)
   local opts = config.options
   local req = request.context.cursor_before_line:sub(request.offset)
   local isIncomplete = false
+
   if opts.exact_length > 0 then
+    if #request.context.cursor_before_line < opts.exact_length then
+      callback({ items = {}, isIncomplete = isIncomplete })
+      return
+    end
+
     req = req:sub(1, opts.exact_length)
     isIncomplete = #req < opts.exact_length
   end
