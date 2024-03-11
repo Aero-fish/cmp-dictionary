@@ -53,11 +53,14 @@ end
 ---@param callback fun(response: lsp.CompletionList)
 function source:complete(request, callback)
   local opts = config.options
-  local req = request.context.cursor_before_line:sub(request.offset)
+  local ctx = request.context
+  local before_line = ctx.cursor_before_line
+
+  local req = before_line:sub(request.offset)
   local isIncomplete = false
 
   if opts.exact_length > 0 then
-    if #request.context.cursor_before_line < opts.exact_length then
+    if #vim.fn.trim(before_line) < opts.exact_length then
       callback({ items = {}, isIncomplete = isIncomplete })
       return
     end
